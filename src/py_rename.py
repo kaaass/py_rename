@@ -56,10 +56,10 @@ class RenameIt(object):
             if not self.dryrun:
                 os.rename(old_name, new_name)
                 # self._print(f"real renaming: {old_name} --> {new_name}")
-            self._print(f"renaming: {old_name} --> {new_name}")
+            self._print("renaming: "+old_name+" --> "+new_name)
 
         except OSError as e:
-            self._print(f"Failed to rename {old_name} --> {new_name}: {e}")
+            self._print("Failed to rename "+old_name+" --> "+new_name+": "+e)
 
     def bulk_rename(self, rename_func, *args):
         """
@@ -70,7 +70,7 @@ class RenameIt(object):
         :return: None
         """
         matched = sum([rename_func(filename, *args) for filename in self.filenames])
-        self._print(f"files matched: {matched}")
+        self._print("files matched: "+str(matched))
 
     def match_filename(self, filename, pattern, replacement, full):
         """
@@ -100,14 +100,14 @@ class RenameIt(object):
         :return: True or False depending on if match or no match
         """
         if not match:
-            self._print(f"not matched {filename}")
+            self._print("not matched "+filename)
             return False
 
         groups = match.groups()
-        group_kwargs = {f"group_{idx + 1}": group for idx, group in enumerate(groups)}
+        group_kwargs = {"group_"+str(idx + 1): group for idx, group in enumerate(groups)}
 
         if replacement is None:
-            self._print(f"matched {filename}")
+            self._print("matched "+filename)
             return True
 
         new_name = re.sub(pattern, replacement, filename)

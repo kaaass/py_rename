@@ -30,7 +30,7 @@ setuptools.setup(
         "dev": extras_require,
     },
     license='MIT',
-    python_requires='>=3.6.0',
+    python_requires='>=3.5.0',
     entry_points={
         "console_scripts": [
             "py-rename = src:main",

@@ -14,7 +14,7 @@ def test_rename():
         os.chdir("tests/res")
 
         for idx in range(3):
-            os.system(f'touch "ab12+Red+(000{idx}).txt"')
+            os.system('touch "ab12+Red+(000{}).txt"'.format(idx))
 
         rename = RenameIt(False, False, False)
         rename.bulk_rename(
@@ -24,7 +24,7 @@ def test_rename():
         assert files == {"00-Red.txt", "01-Red.txt", "02-Red.txt"}
 
         for idx in range(3):
-            os.system(f'rm "0{idx}-Red.txt"')
+            os.system('rm "0{}-Red.txt"'.format(idx))
 
     finally:
         os.chdir(cwd)
@@ -42,7 +42,7 @@ def test_dryrun_match(capsys):
         os.chdir("tests/res")
 
         for idx in range(3):
-            os.system(f'touch "ab12+Red+(000{idx}).txt"')
+            os.system('touch "ab12+Red+(000{}).txt"'.format(idx))
 
         rename = RenameIt(True, False, True)
         rename.bulk_rename(rename.match_filename, r".+\(0000\).+", None, True)
@@ -52,7 +52,7 @@ def test_dryrun_match(capsys):
         assert captured.out == expected_output
 
         for idx in range(3):
-            os.system(f'rm "ab12+Red+(000{idx}).txt"')
+            os.system('rm "ab12+Red+(000{}).txt"'.format(idx))
 
     finally:
         os.chdir(cwd)
@@ -69,7 +69,7 @@ def test_prefix():
         os.chdir("tests/res")
 
         for idx in range(3):
-            os.system(f'touch "ab12+Red+(000{idx}).txt"')
+            os.system('touch "ab12+Red+(000{}).txt"'.format(idx))
 
         rename = RenameIt(False, False, False)
         rename.bulk_rename(rename.prefix_filename, "testab")
@@ -81,7 +81,7 @@ def test_prefix():
         }
 
         for idx in range(3):
-            os.system(f'rm "testabab12+Red+(000{idx}).txt"')
+            os.system('rm "testabab12+Red+(000{}).txt"'.format(idx))
 
     finally:
         os.chdir(cwd)
@@ -98,7 +98,7 @@ def test_postfix():
         os.chdir("tests/res")
 
         for idx in range(3):
-            os.system(f'touch "ab12+Red+(000{idx}).txt"')
+            os.system('touch "ab12+Red+(000{}).txt"'.format(idx))
 
         rename = RenameIt(False, False, False)
         rename.bulk_rename(rename.postfix_filename, "testab")
@@ -110,7 +110,7 @@ def test_postfix():
         }
 
         for idx in range(3):
-            os.system(f'rm "ab12+Red+(000{idx})testab.txt"')
+            os.system('rm "ab12+Red+(000{})testab.txt"'.format(idx))
 
     finally:
         os.chdir(cwd)
@@ -127,7 +127,7 @@ def test_postfixExt():
         os.chdir("tests/res")
 
         for idx in range(3):
-            os.system(f'touch "ab12+Red+(000{idx}).txt"')
+            os.system('touch "ab12+Red+(000{}).txt"'.format(idx))
 
         rename = RenameIt(False, False, False)
         rename.bulk_rename(rename.postfix_filename, "testab", True)
@@ -139,7 +139,7 @@ def test_postfixExt():
         }
 
         for idx in range(3):
-            os.system(f'rm "ab12+Red+(000{idx}).txttestab"')
+            os.system('rm "ab12+Red+(000{}).txttestab"'.format(idx))
 
     finally:
         os.chdir(cwd)
@@ -156,7 +156,7 @@ def test_lower():
         os.chdir("tests/res")
 
         for idx in range(3):
-            os.system(f'touch "ReD+(000{idx}).txt"')
+            os.system('touch "ReD+(000{}).txt"'.format(idx))
 
         rename = RenameIt(False, False, False)
         rename.bulk_rename(rename.lower_filename)
@@ -168,7 +168,7 @@ def test_lower():
         }
 
         for idx in range(3):
-            os.system(f'rm "red+(000{idx}).txt"')
+            os.system('rm "red+(000{}).txt"'.format(idx))
 
     finally:
         os.chdir(cwd)
@@ -185,7 +185,7 @@ def test_replace():
         os.chdir("tests/res")
 
         for idx in range(3):
-            os.system(f'touch "ab12 Red (000{idx}).txt"')
+            os.system('touch "ab12 Red (000{}).txt"'.format(idx))
 
         rename = RenameIt(False, False, False)
         rename.bulk_rename(rename.replace_space)
@@ -197,7 +197,7 @@ def test_replace():
         }
 
         for idx in range(3):
-            os.system(f'rm "ab12_Red_(000{idx}).txt"')
+            os.system('rm "ab12_Red_(000{}).txt"'.format(idx))
 
     finally:
         os.chdir(cwd)
@@ -214,7 +214,7 @@ def test_replaceChar():
         os.chdir("tests/res")
 
         for idx in range(3):
-            os.system(f'touch "ab12 Red (000{idx}).txt"')
+            os.system('touch "ab12 Red (000{}).txt"'.format(idx))
 
         rename = RenameIt(False, False, False)
         rename.bulk_rename(rename.replace_space, "+")
@@ -226,7 +226,7 @@ def test_replaceChar():
         }
 
         for idx in range(3):
-            os.system(f'rm "ab12+Red+(000{idx}).txt"')
+            os.system('rm "ab12+Red+(000{}).txt"'.format(idx))
 
     finally:
         os.chdir(cwd)
@@ -243,7 +243,7 @@ def test_camelcase():
         os.chdir("tests/res")
 
         for idx in range(3):
-            os.system(f'touch "ab12 Red (000{idx}).txt"')
+            os.system('touch "ab12 Red (000{}).txt"'.format(idx))
 
         rename = RenameIt(False, False, False)
         rename.bulk_rename(rename.camel_case)
@@ -255,7 +255,7 @@ def test_camelcase():
         }
 
         for idx in range(3):
-            os.system(f'rm "Ab12Red000{idx}.txt"')
+            os.system('rm "Ab12Red000{}.txt"'.format(idx))
 
     finally:
         os.chdir(cwd)
